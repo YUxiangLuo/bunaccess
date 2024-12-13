@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="log">
+        hello, world!
+    </div>
+    <script>
+        const td = new TextDecoder();
+        const ws = new WebSocket("ws://localhost:6161");
+        ws.onopen = () => {
+            console.log("tcp connection connected")
+        }
+        ws.onmessage = async (msg) => {
+           log.innerText = (td.decode(await msg.data.arrayBuffer()));
+        }
+    </script>
+</body>
+</html>
